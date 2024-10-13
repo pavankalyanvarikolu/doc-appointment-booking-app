@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pavanvarikolu  # corrected
+      MONGO_INITDB_ROOT_PASSWORD: pavankalyan    # corrected
+      MONGO_INITDB_DATABASE: prescripto          # add database initialization
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - prescripto
+
+  backend:
+    build: .
+    container_name: backend
+    command: npm run server                      # corrected
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://pavanvarikolu:pavankalyan@mongodb-container:27017/prescripto  # corrected URI
+    networks:
+      - prescripto
+
+networks:
+  prescripto:
+    driver: bridge
+
+volumes:
+  mongo-data:
