@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: prescripto-app
+  name: mongo-pv
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1G
+  hostPath:
+    path: /tmp/prescripto-pv
