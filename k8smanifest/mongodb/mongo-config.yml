@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: prescripto-app
-  name: mongo-config
-data:
-  MONGO_ROOT_USER: cGF2YW52YXJpa29sdQ==
-  MONGO_ROOT_PASSWORD: cGF2YW5rYWx5YW4=
-  MONGO_DB: "prescripto"
