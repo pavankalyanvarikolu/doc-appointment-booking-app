@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: prescripto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: pavanvarikolu/prescriptobackendapp:1.0
+          ports:
+            - containerPort: 4000
+          env:
+            - name: MONGO_URI
+              value: "mongodb://pavanvarikolu:pavankalyan@mongodb.prescripto.svc.cluster.local:27017/prescripto"
+          command: ["npm", "run", "server"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: prescripto
+spec:
+  ports:
+    - port: 4000
+      targetPort: 4000
+  selector:
+    app: backend
+  type: LoadBalancer
+

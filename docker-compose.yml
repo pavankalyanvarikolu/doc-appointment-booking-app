@@ -15,7 +15,7 @@ services:
       - prescripto
 
   backend:
-    build: .
+    image: pavanvarikolu/prescriptobackendapp:1.0
     container_name: backend
     command: npm run server                      # corrected
     ports:
@@ -28,10 +28,9 @@ services:
       - prescripto
 
   frontend:
-    build:
-      context: ../frontend
+    image: pavanvarikolu/prescriptofrontendapp:1.0
     container_name: frontend-container
-    depends_on: 
+    depends_on:
       - backend
     ports:
       - 3000:3000
